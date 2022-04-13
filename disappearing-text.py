@@ -53,6 +53,7 @@ def start():
     global after_id
     intro.grid_forget()
     start_btn.grid_forget()
+    label_text.set('Start Writing...')
     label.grid(column=2, row=1, pady=(40,10), sticky=(W,E)) 
     countdown.grid(column=2, row=1, pady=(40,10), sticky=E) 
     count.set('5')
@@ -76,6 +77,7 @@ def start_timing(event):
     global start_timer
     if (event.keysym in printable) or (event.keycode in P_CODES.values()):
       start_timer=True
+      label_text.set('Writing...')
       count.set('5')  
 
 def update():
@@ -104,6 +106,7 @@ def clear_text():
     '''
     global start_timer 
     textbox.delete('1.0',END) 
+    label_text.set('Start Writing...')
     count.set('5')
     start_timer=False
 
@@ -147,7 +150,8 @@ start_btn = ttk.Button(frame, text="Let's go", command=start, style='style.TButt
 start_btn.grid(column=1, row=2, sticky=S, pady=(0, 120), ipady=3)
 
 # second screen
-label = ttk.Label(frame, text='Start Writing...', style='style.TLabel')
+label_text = StringVar()
+label = ttk.Label(frame, textvariable=label_text, style='style.TLabel')
 count = StringVar()
 image=PhotoImage(file="icons8-timer-64.png")
 countdown = ttk.Label(frame, image=image, textvariable=count, compound='left', style='stylecount.TLabel')
